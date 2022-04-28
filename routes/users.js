@@ -553,7 +553,7 @@ router.post('/updatePropertyFeedback', async function(req, res, next) {
         });
 
 
-        const lease=await database.lease.findOneAndUpdate({propertyID:req.body.propertyID,tenantID:req.body.tenantID},{
+        const lease=await database.lease.findOneAndUpdate({propertyID:req.body.propertyID},{
           rating:newRating
         });
 
