@@ -1,0 +1,26 @@
+
+body{
+    margin-top: 75px;
+}
+.login{
+    margin-top: 2vh;
+}
+
+.login-img{
+    position: relative;
+    top: 20px;
+    left: 40%;
+    width: 20%;
+    height: 20%;
+    border: 1px solid #000;
+}
+
+.login .panel-heading{
+    background-color: rgb(213, 216, 49) !important;
+}
+
+.star{
+    color: red;
+    padding-top: 5px;
+}
+

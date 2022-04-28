@@ -1,0 +1,366 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>New User</title>
+
+        <link rel="stylesheet" href="/users/style/userStyle.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        <script
+        src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body>
+
+        <section id="header-nave">
+            <nav class="navbar navbar-def navbar-fixed-top">
+              <div class="container-fluid ">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="../">
+                          <img style="margin-top: -15px;" alt="brand" src="/images/logo/logo.png" width="150" height="50">
+                    </a>
+                </div>
+            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/users/login"><i class="fa fa-user" aria-hidden="true"></i> Login <span class="sr-only">(current)</span></a></li>
+                    </li>
+                      
+                    
+                </ul>  
+                  
+                  <!-- <ul class="nav navbar-nav navbar-right">
+                      <li class="active"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#"><i class="fa fa-history" aria-hidden="true"></i> About Us <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Contact Us</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"></i> Service <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="fa fa-laptop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Digital Consulting</a></li>
+                          <li><a href="#"><i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Mobile App Development</a></li>
+                          <li><a href="#"><i class="fa fa-apple" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; OS App Development</a></li>
+                          <li><a href="#"><i class="fa fa-android" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Android App Development</a></li>
+                          <li><a href="#"><i class="fa fa-android" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; React Native App Development</a></li>
+                          <li><a href="#"><i class="fa fa-eercast" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Web App Development</a></li>
+                          <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Cloud Service</a></li>
+                          <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Email Service</a></li>
+                        </ul>
+                      </li>
+                      
+                    
+                  </ul> -->
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+          </section>
+       
+       <div class="container-fluid">
+           <div class="row">
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  col-md-offset-4 col-lg-offset-4 login">
+                   
+                   <div class="panel panel-default">
+                         <div class="panel-heading">
+                               <h3 class="panel-title">New Register</h3>
+                         </div>
+
+                         <%if(msg){%>
+                            <div class="alert" style="text-align: center; color: crimson; font-size: 18px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Worning!</strong> <%=msg%>
+                            </div>
+                        <%}%>
+
+                         <div class="panel-body">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#landlord" aria-controls="landlord" role="tab" data-toggle="tab">Landlord</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tenant" aria-controls="tenant" role="tab" data-toggle="tab">Tenant</a>
+                                    </li>
+                                </ul>
+                            
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="landlord">
+                                        <img src="/users/img/landlord.png" class="img-responsive img-circle login-img" alt="Image">
+                                        <form action="/users/regLandlord" method="POST"  role="form">
+                                             <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label for="exampleInputEmail1">Username : <span class="star">*</span></label>
+                                                    <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+
+                                                </div>
+                                             
+                                             </div>
+                                             <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Password : <span class="star">*</span></label>
+                                                    <input name="password" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Confirm Password : <span class="star">*</span></label>
+                                                    <input name="confrmPassword" type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+
+                                                </div>
+                                             
+                                             </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label for="exampleInputPassword1">Landlord Name : <span class="star">*</span></label>
+                                                <input name="name" type="text" class="form-control" id="exampleInputPassword1" placeholder="your name">
+
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Mobile Number : </label>
+                                                <input name="mobileno" type="text" class="form-control" id="exampleInputPassword1" placeholder="Opsonal">
+
+                                                </div>
+
+                                                <div class="col-sm-6">
+                                                <label for="exampleInputPassword1">Post Code : <span class="star">*</span></label>
+                                                <input name="postCode" type="text" class="form-control" id="exampleInputPassword1" style="text-transform:uppercase" placeholder="Area Postcode ie: E13 8QB">
+
+                                                </div>
+
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Door No/Flat No : <span class="star">*</span></label>
+                                                <input name="doorNo" type="text" class="form-control" id="exampleInputPassword1" placeholder="">
+
+                                                </div>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Address : <span class="star">*</span></label>
+                                                <textarea name="address" id="textarea" class="form-control" rows="3" required="required"></textarea>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Country : <span class="star">*</span></label>
+                                                <select name="country" id="countryLandlord" class="form-control" required="required">
+                                                    <option value="">Select Country</option>
+                                                </select>
+
+                                                </div>
+                                            </div>
+
+                                            
+                                         
+                                            <div class="form-group">
+                                                <div class="col-sm-12" style="margin-top: 10px;">
+                                                    <button type="submit" class="btn btn-primary">Register</button>
+                                                </div>
+                                            </div>
+                                           
+                                             
+                                         </form>
+                                     </div>
+
+
+                                     <!-- FRO TENENT -->
+
+
+
+                                    <div role="tabpanel" class="tab-pane" id="tenant">
+                                        
+                                        <img src="/users//img/tenant1.jpeg" class="img-responsive img-circle login-img" alt="Image">
+                                        
+                                       
+
+                                       
+                                        
+                                        
+                                        <form action="/users/regTenent" method="POST" enctype="multipart/form-data"  role="form">
+                                            <div class="form-group">
+                                                <div class="col-sm-12 ">
+                                                <label for="exampleInputPassword1">Post Code : <span class="star">*</span></label>
+                                                <input type="text" name="postCode" class="form-control" style="text-transform:uppercase" id="exampleInputPassword1" placeholder="Area Postcode ie: E13 8QB" required>
+
+                                                </div>
+
+                                                <div class="col-sm-8">
+
+                                                    
+                                                    <div class="row">
+                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                                            <label>Address Profe : <span class="star">*</span> <span style="font-size: 6px; color: rgb(158, 151, 151);">ie: Bank Statement, Electricity/Gas Bill</span> </label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                                                            <input type="file"  accept="image/*" name="file1" id="file"  onchange="loadFile(event)" style="display: none;">
+                                                        <label class="btn btn-default" for="file" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                                                        </div>
+
+                                                        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8" >
+                                                            <img class="img-thumbnail" id="output" src="/images/Upload.png" style="height:50px;"/>
+                                                        </div>
+                                                    </div>
+                                                        <script>
+                                                            var loadFile = function(event) {
+                                                                var image = document.getElementById('output');
+                                                                image.src = URL.createObjectURL(event.target.files[0]);
+                                                            };
+                                                        </script>
+    
+                                                </div>
+                                            </div> 
+
+                                           <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Door No/Flat No : <span class="star">*</span></label>
+                                                <input type="text" class="form-control" name="doorNo" id="exampleInputPassword1" placeholder="" required>
+
+                                                </div>
+                                            </div>
+                                            
+                                            
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Address : <span class="star">*</span></label>
+                                                <textarea name="address" id="textarea" class="form-control" rows="3" required="required"></textarea>
+
+                                                </div>
+                                            </div>
+
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                <label for="exampleInputPassword1">Country : <span class="star">*</span></label>
+                                                <select name="country" id="countryTenant" class="form-control" required="required">
+                                                    <option value="">Select Country</option>
+                                                </select>
+
+                                                </div>
+                                            </div>
+
+                                           
+                                          
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label for="exampleInputEmail1">Username : <span class="star">*</span></label>
+                                                    <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email" required>
+
+                                                </div>
+                                             
+                                             </div>
+                                             <div class="form-group">
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Password : <span class="star">*</span></label>
+                                                    <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <label for="exampleInputPassword1">Confirm Password : <span class="star">*</span></label>
+                                                    <input type="password" name="confrmPassword" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+
+                                                </div>
+                                             
+                                             </div>
+
+                                             
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label for="exampleInputPassword1">Name : <span class="star">*</span></label>
+                                                <input type="text" name="name" class="form-control" id="exampleInputPassword1" placeholder="your name" required>
+
+                                                </div>
+                                                
+                                            </div>
+
+                                            <div class="form-group">
+                                                <div class="col-sm-12">
+                                                    <label for="exampleInputPassword1">Mobile Number : </label>
+                                                <input type="text" name="mobileno" class="form-control" id="exampleInputPassword1" placeholder="Opsonal">
+
+                                                </div>
+                                                
+                                            </div>
+                                        
+                                            <div class="form-group">
+                                                <div class="col-sm-12" style="margin-top: 10px;">
+                                                    <button   type="submit" class="btn btn-primary">Register</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                     </div>
+                                </div>
+                            </div>
+                         </div>
+                   </div>
+                   
+                   
+                   
+               </div>
+           </div>
+           
+       </div>
+
+       <script>
+
+        //    Get Country List
+           $.get('https://countriesnow.space/api/v0.1/countries/info?returns=currency,flag,unicodeFlag,dialCode',{},function(data){
+               
+               data.data.forEach(val => {
+                console.log(val.name) 
+                $("#countryTenant").append('<option value="'+val.name+'">'+val.name+'</option>');
+                $("#countryLandlord").append('<option value="'+val.name+'">'+val.name+'</option>')
+               });
+           })
+
+       </script>
+
+       
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>

@@ -1,0 +1,168 @@
+<div id="box1" class="container-fluid" style="display: none;" >
+
+    <div class="panel panel-success">
+      <div class="panel-heading">
+        <h3 class="panel-title">Request add property</h3>
+      </div>
+      <div class="panel-body">
+        <form action="/users/addNewProperty" method="POST" enctype="multipart/form-data"  role="form">
+       
+        
+        <div style="margin-top: 20px;" class="row">
+          <div style="margin-bottom: 10px;"  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <div class="thumbnail">
+                <img id="mainImg" src="/images/home.png"  alt="Image">
+                <div class="caption" style="text-align: center;">
+                  <input type="file"  accept="image/*" name="file1" id="file"  onchange="loadFile1(event)" style="display: none; width: 100%;">
+                  <label class="btn btn-default" for="file" style="cursor: pointer;">Choose Main Image File <i class="fa fa-camera" aria-hidden="true"></i></label>
+                </div>
+              </div>
+            </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img id="impOp1" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                  <input type="file"  accept="image/*" name="file2" id="file2"  onchange="loadFile2(event)" style="display: none; width: 100%;">
+                  <label class="btn btn-default btn-block" for="file2" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img id="impOp2" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                <input type="file"  accept="image/*" name="file3" id="file3"  onchange="loadFile3(event)" style="display: none; width: 100%;">
+                  <label class="btn btn-default btn-block" for="file3" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+              </div>
+              <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                <img id="impOp3" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                <input type="file"  accept="image/*" name="file4" id="file4"  onchange="loadFile4(event)" style="display: none; width: 100%;">
+                  <label class="btn btn-default btn-block" for="file4" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+              </div>
+          </div>
+
+          <script>
+            var loadFile1 = function(event) {
+                var mainImg = document.getElementById('mainImg');
+                mainImg.src = URL.createObjectURL(event.target.files[0]);
+                console.log(event.target.files)
+            };
+
+            var loadFile2 = function(event) {
+                var impOp1 = document.getElementById('impOp1');
+                impOp1.src = URL.createObjectURL(event.target.files[0]);
+                console.log(event.target.files)
+            };
+
+            var loadFile3 = function(event) {
+                var impOp2 = document.getElementById('impOp2');
+                impOp2.src = URL.createObjectURL(event.target.files[0]);
+                console.log(event.target.files)
+            };
+
+            var loadFile4 = function(event) {
+                var impOp3 = document.getElementById('impOp3');
+                impOp3.src = URL.createObjectURL(event.target.files[0]);
+                console.log(event.target.files)
+            };
+        </script>
+
+          <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+           
+
+            <div class="form-group">
+              <div class="col-xs-12 col-sm-12" >
+                <h3>Property Details</h3>
+              </div>
+            </div>
+            
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12" >
+                  <input  type="text" name="name" class="form-control" placeholder="Property Name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-xs-6 col-sm-6" style="margin-top: 10px;" >
+                  <input type="text" name="doorNo" class="form-control" placeholder="Door Name" required>
+                </div>
+                <div class="col-xs-6 col-sm-6" style="margin-top: 10px;" >
+                  <input type="text" name="postCode" class="form-control" placeholder="Post Code Ex: E13 8QB" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                  <input  type="text" name="address" class="form-control" placeholder="Address" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                 <select name="type" class="form-control" required>
+                  <option value="">Select Property Type</option>
+                   <option value="Vila">Vila</option>
+                   <option value="Vila">Flat</option>
+                   <option value="Vila">Banglo</option>
+                   <option value="Vila">House</option>
+                 </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                  <input  type="text" name="landlordName" class="form-control" placeholder="Landlord Name" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-xs-12 col-sm-12" style="margin-top: 10px; text-align: center;" >
+                  <button type="submit" class="btn btn-primary">Add Property</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+        
+        
+  
+    
+    <div class="panel panel-primary" style="display: block;">
+        <div class="panel-heading">
+          <h3 class="panel-title">Add Property
+            <span onclick="closeaddproperty()" style="float:right; background-color: red; color: yellow; padding: 3px; border-radius: 5px;">X</span>
+          </h3>
+        </div>
+        <div class="panel-body">
+         
+         <div class="row">
+           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+             
+             <div class="form-group">
+               <div class="col-sm-10">
+                 <input type="search" id="postCode" class="form-control" placeholder="Post Code  Ex: E13 8QB">
+               </div>
+               <div class="col-sm-2">
+                
+                <button onclick="searchProperty()" type="button" class="btn btn-block btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                
+               </div>
+             </div>
+
+             <div class="form-group">
+               <div class="col-sm-10">
+                <ul id="propList" class="list-group">
+                  <!-- <li class="list-group-item">
+                    <span class="badge">
+                      <img  src="/images/home.png" class="" style="width:50px; height: 50px;" alt="Image"> 
+                  </span>
+                    Name: JK Vila<br>
+                    Address: 12, Canning St ,<br>Post Code: E13 8QB
+                  </li> -->
+                  
+                </ul>
+               </div>
+             </div>
+             
+           </div>
+         </div>
+         
+        </div>
+    </div>
+    
+  </div>

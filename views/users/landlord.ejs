@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mr Review</title>
+    <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="/stylesheets/sidebar.css" />
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery -->
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+   
+
+    <script src="/javascripts/sidebar.js"></script> 
+    <script src="/javascripts/user/landscript.js"></script> 
+    <style>
+      #stars {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20vh;
+        font-size: 5vh;
+        color: #9694948f;
+        gap: 1vh;
+      }
+      
+      #stars i {
+        transition: 0.25s ease;
+      }
+      #stars .selected {
+        color: #ffd900b7;
+      }
+
+      #propertyStar .yellow {
+        color: #ffd900b7;
+      }
+      
+          </style>
+     
+  </head>
+  <body>
+    <section id="header-nave">
+      <nav class="navbar navbar-def navbar-fixed-top">
+        <div class="container-fluid ">
+          <!-- Brand and toggle get grouped for better mobile display -->
+          <div class="navbar-header">
+            
+            <a class="navbar-brand" href="../">
+                    <img style="margin-top: -15px;" alt="brand" src="/images/logo/logo.png" width="150" height="50">
+              </a>
+
+              <ul class="nav navbar-nav navbar-right" style= " position: absolute; right: 10px;">
+
+                <li class=""><a href="/users/logout"><i class="fa fa-lock" aria-hidden="true"></i> Logout</a></li>
+              </ul>
+            
+          </div>
+        </div><!-- /.container-fluid -->
+      </nav>
+    </section>
+
+    <div id="sidebar-waper">
+        <div class="togle-btn" onclick="sidebartoggle()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        
+       
+        <ul class="sidebar-menue">
+        <li class="Dashboard" style="border-bottom: 1px solid #FFF;">
+            <div style="font-size: 25px; text-align: center;"><i class="fa fa-user-circle" aria-hidden="true"></i></div>
+            <div class="text-center"><%=landlord.name%><br><%=landlord.mobileno%><br><span style="font-size: 15px; color: green;">Landlord</span></div>
+            
+        </li>
+
+        <li class="Recharge">
+            <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+              <i class="fa fa-credit-card" aria-hidden="true"></i>
+                <span>Profile</span>
+            </a>
+          </li>
+        
+        <li class="Recharge">
+          <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+            <i class="fa fa-credit-card" aria-hidden="true"></i>
+              <span>Property List</span>
+          </a>
+        </li>
+
+        <li  onclick="rideDetails()" class="Myrides">
+            <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-taxi" aria-hidden="true"></i>
+                <span>Tenant Feedback</span>
+            </a>
+            
+          </li>
+
+          <li  onclick="ScheduleJourney()" class="Myrides">
+            <a href="#" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                <i class="fa fa-taxi" aria-hidden="true"></i>
+                <span>Rent Paid</span>
+            </a>
+            
+          </li>
+
+         
+
+        <li class="Logout">
+            <a href="/users/logout">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
+                 <span> Logout</span>
+                </a>
+        </li>
+        </ul>
+    </div>
+   
+    <!-- main Content Start -->
+    
+      <section id="main-content">
+
+        <div id="box1" class="container-fluid" style="display: none;" >
+          <div id="addProp" class="panel panel-success" style="display: none;">
+            <div class="panel-heading">
+              <h3 class="panel-title">Request add property
+                <span onclick="closeaddproperty()" style="float:right; background-color: red; color: yellow; padding: 3px; border-radius: 5px;">X</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <form action="/users/addNewPropertyByLandlord" method="POST" enctype="multipart/form-data"  role="form">
+                <div style="margin-top: 20px;" class="row">
+  
+                  <div style="margin-bottom: 10px;"  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                      <div class="thumbnail">
+                        <img id="mainImg" src="/images/home.png"  alt="Image">
+                        <div class="caption" style="text-align: center;">
+                          <input type="file"  accept="image/*" capture="camera" name="file1" id="file"  onchange="loadFile1(event)" style="display: none; width: 100%;">
+                          <label class="btn btn-default" for="file" style="cursor: pointer;">Choose Main Image File <i class="fa fa-camera" aria-hidden="true"></i></label>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <img id="impOp1" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                          <input type="file"  accept="image/*" name="file2" id="file2"  onchange="loadFile2(event)" style="display: none; width: 100%;">
+                          <label class="btn btn-default btn-block" for="file2" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                      </div>
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <img id="impOp2" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                        <input type="file"  accept="image/*" name="file3" id="file3"  onchange="loadFile3(event)" style="display: none; width: 100%;">
+                          <label class="btn btn-default btn-block" for="file3" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                      </div>
+                      <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                        <img id="impOp3" src="/images/home.png" style="width: 100%; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                        <input type="file"  accept="image/*" name="file4" id="file4"  onchange="loadFile4(event)" style="display: none; width: 100%;">
+                          <label class="btn btn-default btn-block" for="file4" style="cursor: pointer;"><i class="fa fa-camera" aria-hidden="true"></i></label>
+                      </div>
+                  </div>
+  
+                  <script>
+                    var loadFile1 = function(event) {
+                        var mainImg = document.getElementById('mainImg');
+                        mainImg.src = URL.createObjectURL(event.target.files[0]);
+                        console.log(event.target.files)
+                    };
+        
+                    var loadFile2 = function(event) {
+                        var impOp1 = document.getElementById('impOp1');
+                        impOp1.src = URL.createObjectURL(event.target.files[0]);
+                        console.log(event.target.files)
+                    };
+        
+                    var loadFile3 = function(event) {
+                        var impOp2 = document.getElementById('impOp2');
+                        impOp2.src = URL.createObjectURL(event.target.files[0]);
+                        console.log(event.target.files)
+                    };
+        
+                    var loadFile4 = function(event) {
+                        var impOp3 = document.getElementById('impOp3');
+                        impOp3.src = URL.createObjectURL(event.target.files[0]);
+                        console.log(event.target.files)
+                    };
+                </script>
+
+                
+  
+                <input name="country" type="hidden" value="<%=landlord.country%>">
+                <input name="landlordID" type="hidden" value="<%=landlord.landlordID%>">
+    
+                  <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                    <div class="form-group">
+                      <div class="col-xs-12 col-sm-12" >
+                        <h3>Property Details</h3>
+                      </div>
+                    </div>
+                    
+                      <div class="form-group">
+                        <div class="col-xs-12 col-sm-12" >
+                          <input  type="text" name="name" class="form-control" placeholder="Property Name">
+                        </div>
+                      </div>
+        
+                      <div class="form-group">
+                        <div class="col-xs-6 col-sm-6" style="margin-top: 10px;" >
+                          <input type="text" name="doorNo" class="form-control" placeholder="Door Name" required>
+                        </div>
+                        <div class="col-xs-6 col-sm-6" style="margin-top: 10px;" >
+                          <input type="text" name="postCode" class="form-control" placeholder="Post Code Ex: E13 8QB" required>
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                          <input  type="text" name="address" class="form-control" placeholder="Address" required>
+                        </div>
+                      </div>
+        
+                      <div class="form-group">
+                        <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                         <select name="type" class="form-control" required>
+                          <option value="">Select Property Type</option>
+                           <option value="Vila">Vila</option>
+                           <option value="Vila">Flat</option>
+                           <option value="Vila">Banglo</option>
+                           <option value="Vila">House</option>
+                         </select>
+                        </div>
+                      </div>
+        
+                      <!-- <div class="form-group">
+                        <div class="col-xs-12 col-sm-12" style="margin-top: 10px;" >
+                          <input  type="text" name="landlordName" class="form-control" value="<%=landlord.name%>">
+                        </div>
+                      </div> -->
+
+                      <input  type="hidden" name="landlordName" class="form-control" value="<%=landlord.name%>">
+  
+                      <div class="form-group">
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;" >
+                          <input type="file"  accept="image/*" name="file5" id="file5"  onchange="loadFile5(event)" style="display: none; width: 100%;">
+                          <label class="btn btn-default btn-block" for="file5" style="cursor: pointer;">Property Address proof <i class="fa fa-camera" aria-hidden="true"></i></label>
+                        </div>
+  
+                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" style="margin-top: 10px;" >
+                          <img id="impAdsProof" src="/images/home.png" style="width: 10vh; height:10vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                        </div>
+  
+                        <script>
+                          var loadFile5 = function(event) {
+                        var impAdsProof = document.getElementById('impAdsProof');
+                        impAdsProof.src = URL.createObjectURL(event.target.files[0]);
+                        
+                          };
+                        </script>
+  
+                      </div>
+        
+                      <div class="form-group">
+                        <div class="col-xs-12 col-sm-12" style="margin-top: 10px; text-align: center;" >
+                          <button type="submit" class="btn btn-primary">Add Property</button>
+                        </div>
+                      </div>
+                  </div>
+                
+                </div>
+  
+              </form>
+  
+            </div>
+          </div>
+
+          <div id="searchProp" class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">Add Property
+                <span onclick="closeaddproperty()" style="float:right; background-color: red; color: yellow; padding: 3px; border-radius: 5px;">X</span>
+              </h3>
+            </div>
+            <div class="panel-body">
+             
+             <div class="row">
+               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-md-offset-3 col-lg-offset-3">
+                 
+                 <div class="form-group">
+                   <div class="col-sm-10">
+                     <input type="search" id="postCode" class="form-control" placeholder="Post Code  Ex: E13 8QB">
+                   </div>
+                   <div class="col-sm-2">
+                    
+                    <button onclick="searchProperty()" type="button" class="btn btn-block btn-primary"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    
+                   </div>
+                 </div>
+    
+                 <div class="form-group">
+                   <div class="col-sm-10">
+                    <ul id="propList" class="list-group">
+                      <!-- <li class="list-group-item">
+                        <span class="badge">
+                          <img  src="/images/home.png" class="" style="width:50px; height: 50px;" alt="Image"> 
+                      </span>
+                        Name: JK Vila<br>
+                        Address: 12, Canning St ,<br>Post Code: E13 8QB
+                      </li> -->
+                      
+                    </ul>
+                   </div>
+                 </div>
+                 
+               </div>
+             </div>
+             
+            </div>
+        </div>
+        
+
+        </div>
+         <!-- Ene Box1 -->
+
+         <div id="box2" class="container-fluid" >
+
+          <div class="panel panel-success">
+            <div class="panel-heading">
+                  <h3 class="panel-title">My Property</h3>
+                  <button onclick="addnewproperty()" style="float: right; margin-top: -25px;" type="button" class="btn btn-default">Add New</button>
+            </div>
+            <div class="panel-body">
+              <ul class="list-group">
+                <li class="list-group-item active">
+                    
+                    Country : <%=landlord.country%>
+                </li>
+
+                <div style="width: 100%; height: 50vh; overflow-y: auto ;">
+                  <%if(property.length>0){%>
+
+                    <%property.forEach(function(val){%>
+
+                      <div style="margin-top: 20px;" class="row">
+                        <div style="margin-bottom: 10px;"  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                          
+                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <a href="#" class="thumbnail">
+                              <img id="imgMainBox" src="<%=val.imgMain%>" class="img-rounded" alt="Image">
+                            </a>
+
+                          </div>
+                            
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <img onclick="chengeImg('<%=val.imgMain%>')" src="<%=val.imgMain%>" style="width: 6vh; height: 6vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <img onclick="chengeImg('<%=val.impOp1%>')" src="<%=val.impOp1%>" style="width: 6vh; height: 6vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <img onclick="chengeImg('<%=val.impOp2%>')" src="<%=val.impOp2%>" style="width: 6vh; height: 6vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                            </div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                              <img onclick="chengeImg('<%=val.impOp3%>')" src="<%=val.impOp3%>" style="width: 6vh; height: 6vh; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                            </div>
+                         
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                          <ul class="list-group">
+                            <li class="list-group-item" style="font-size: 18px; font-weight: bold; color: rgb(16, 26, 117);">
+                                <span class="badge" onclick="dtls()" style="cursor: pointer;">Remove</span>
+                                Name : <%=val.name%>
+                            </li>
+                            <li class="list-group-item">
+                                Type : <%=val.type%><br><br>
+                                <p>Address : <%=val.doorNo%>, <%=val.address%>, <%=val.postCode%></p>
+                            </li>
+
+                            <li class="list-group-item list-group-item-success" >
+                              <span class="badge"><%=val.landlordName%></span>
+                              Landlord Name
+                          </li>
+
+                          </ul>
+                        </div>
+
+                        
+
+                      </div>
+  
+                    <%})%>
+  
+                  <%}else{%>
+  
+                    <div style="margin-top: 20px;" class="row">
+                      <div style="margin-bottom: 10px;"  class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                          <a href="#" class="thumbnail">
+                            <img src="/images/home.png" class="img-rounded" alt="Image">
+                          </a>
+
+                        </div>
+                          
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <img src="/images/home.png" style="width: 100%; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                          </div>
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <img src="/images/home.png" style="width: 100%; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                          </div>
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <img src="/images/home.png" style="width: 100%; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                          </div>
+                          <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                            <img src="/images/home.png" style="width: 100%; border-radius: 10px; border: 1px solid #000;" class="img-rounded" alt="Image">
+                          </div>
+                       
+                      </div>
+                      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                        <ul class="list-group">
+                          <li class="list-group-item" style="font-size: 18px; font-weight: bold; color: rgb(16, 26, 117);">
+                            Add Your  Property
+                          </li>
+                          <li class="list-group-item">
+                            Using Add New Button
+                          </li>
+                         
+
+                        </ul>
+                      </div>
+
+
+                    </div>
+  
+                  <%}%>
+                
+                
+                </div>
+
+
+                <div style="margin-top: 10px;" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                  <ul class="list-group">
+                    <li class="list-group-item list-group-item-success">
+                      My Tenant
+                      <input id="landlordID" type="hidden" value="<%=landlord.landlordID%>">
+                    </li>
+                    <li class="list-group-item ">
+                      <div id="Mytenant" style="height: 200px; width: 100%; overflow-x: auto;">
+                        
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <div class="thumbnail">
+                            <img src="/users/img/tenant1.jpeg" class="img-circle" width="50vh" height="50vh"  alt="">
+                            <div class="caption" style="text-align: center;">
+                              <h4>Sukanta Sardar</h4>
+                              <p>ID: 1234</p>
+                              <p>
+                              <button onclick="tenantFeedback()" type="button" class="btn btn-large btn-block btn-warning"><i class="fa fa-star" aria-hidden="true"></i> Rate this Tenant</button>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <div class="thumbnail">
+                            <img data-src="#" alt="">
+                            <div class="caption">
+                              <h3>Title</h3>
+                              <p>
+                                ...
+                              </p>
+                              <p>
+                                <a href="#" class="btn btn-primary">Action</a>
+                                <a href="#" class="btn btn-default">Action</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <div class="thumbnail">
+                            <img data-src="#" alt="">
+                            <div class="caption">
+                              <h3>Title</h3>
+                              <p>
+                                ...
+                              </p>
+                              <p>
+                                <a href="#" class="btn btn-primary">Action</a>
+                                <a href="#" class="btn btn-default">Action</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                          <div class="thumbnail">
+                            <img data-src="#" alt="">
+                            <div class="caption">
+                              <h3>Title</h3>
+                              <p>
+                                ...
+                              </p>
+                              <p>
+                                <a href="#" class="btn btn-primary">Action</a>
+                                <a href="#" class="btn btn-default">Action</a>
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                        
+
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+
+               
+                
+                
+            </ul>
+            </div>
+      </div>
+
+         </div>
+          <!-- Ene Box2 -->
+
+
+          <!-- Box 3 -->
+        <div id="box3" class="container-fluid"  style="display: none;"  >
+
+          
+          <div class="panel panel-info">
+              <div class="panel-heading">
+                <h3 class="panel-title">Property Rating</h3>
+              </div>
+              <div class="panel-body">
+                
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-md-offset-4 col-lg-offset-4">
+                  <div class="thumbnail">
+                    <img style="width: 10vh; height: 10vh;" src="/images/home.png" alt="img">
+                    <div class="caption" style="text-align: center;">
+                      <h3>Sample Vila</h3>
+
+                      <div id="propertyStar">
+                        <i id="propertyStar1" class="fa fa-star" aria-hidden="true"></i>
+                        <i id="propertyStar2" class="fa fa-star" aria-hidden="true"></i>
+                        <i id="propertyStar3" class="fa fa-star" aria-hidden="true"></i>
+                        <i id="propertyStar4" class="fa fa-star" aria-hidden="true"></i>
+                        <i id="propertyStar5" class="fa fa-star" aria-hidden="true"></i>
+                      </div>
+
+                      <p>
+                        <hr>
+                        <div id="stars">
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                          <i class="fa fa-star" aria-hidden="true"></i>
+                        </div>
+                      </p>
+                      <p>
+                        
+                        <textarea id="inputfeedback" class="form-control" rows="3" required="required" placeholder="Describe your experience"></textarea>
+                        <input type="hidden" id="selectrdRating">
+                      </p>
+                      <p>
+                        <button type="button" class="btn btn-default">Submit</button>
+                        
+                      </p>
+                    </div>
+                  </div>
+
+                  
+                  <ul id="oldFeedback" class="list-group">
+                    <li class="list-group-item"><h4>Sukanta Sardar:</h4> 5 <i class="fa fa-star" aria-hidden="true"></i>
+                      <br>Msg: very good
+
+                    </li>
+                  </ul>
+                  
+                </div>
+                
+                
+              </div>
+          </div>
+
+        </div>
+        <!-- End Box 3 -->
+       
+    </section>
+  
+    <!-- main Content End -->
+    
+   
+
+
+    
+    
+   
+    
+  
+    
+   
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  </body>
+</html>
+

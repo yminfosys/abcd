@@ -1,0 +1,158 @@
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>User Login</title>
+
+        <link rel="stylesheet" href="/users/style/userStyle.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/navbar.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.3/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body>
+
+        <section id="header-nave">
+            <nav class="navbar navbar-def navbar-fixed-top">
+              <div class="container-fluid ">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="../">
+                          <img style="margin-top: -15px;" alt="brand" src="/images/logo/logo.png" width="150" height="50">
+                    </a>
+                </div>
+            
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="/users/reg"><i class="fa fa-user" aria-hidden="true"></i> Register <span class="sr-only">(current)</span></a></li>
+                    </li>
+                      
+                    
+                </ul>  
+                  
+                  <!-- <ul class="nav navbar-nav navbar-right">
+                      <li class="active"><a href="/"><i class="fa fa-home" aria-hidden="true"></i> Home <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#"><i class="fa fa-history" aria-hidden="true"></i> About Us <span class="sr-only">(current)</span></a></li>
+                      <li><a href="#"><i class="fa fa-phone" aria-hidden="true"></i> Contact Us</a></li>
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars" aria-hidden="true"></i> Service <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          <li><a href="#"><i class="fa fa-laptop" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Digital Consulting</a></li>
+                          <li><a href="#"><i class="fa fa-mobile" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Mobile App Development</a></li>
+                          <li><a href="#"><i class="fa fa-apple" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; OS App Development</a></li>
+                          <li><a href="#"><i class="fa fa-android" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Android App Development</a></li>
+                          <li><a href="#"><i class="fa fa-android" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; React Native App Development</a></li>
+                          <li><a href="#"><i class="fa fa-eercast" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Web App Development</a></li>
+                          <li><a href="#"><i class="fa fa-cloud" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Cloud Service</a></li>
+                          <li><a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;&nbsp; Email Service</a></li>
+                        </ul>
+                      </li>
+                      
+                    
+                  </ul> -->
+                </div><!-- /.navbar-collapse -->
+              </div><!-- /.container-fluid -->
+            </nav>
+          </section>
+       
+       <div class="container-fluid">
+           <div class="row">
+               
+              
+               <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4  col-lg-offset-4 col-md-offset-4 login">
+                   
+                   <div class="panel panel-default">
+                         <div class="panel-heading">
+                               <h3 class="panel-title">Login</h3>
+                         </div>
+
+                         <%if(msg){%>
+                            <div class="alert" style="text-align: center; color: crimson; font-size: 18px;">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                <strong>Worning!</strong> <%=msg%>
+                            </div>
+                        <%}%>
+                         <div class="panel-body">
+                            <div role="tabpanel">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-tabs" role="tablist">
+                                    <li role="presentation" class="active">
+                                        <a href="#landlord" aria-controls="landlord" role="tab" data-toggle="tab">Landlord</a>
+                                    </li>
+                                    <li role="presentation">
+                                        <a href="#tenant" aria-controls="tenant" role="tab" data-toggle="tab">Tenant</a>
+                                    </li>
+                                </ul>
+                            
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="landlord">
+                                        <img src="/users/img/landlord.png" class="img-responsive img-circle login-img" alt="Image">
+                                         <form  action="/users/loginLandlord" method="POST" enctype="application/x-www-form-urlencoded">
+                                             <div class="form-group">
+                                             <label for="exampleInputEmail1">Username</label>
+                                             <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                             </div>
+                                             <div class="form-group">
+                                             <label for="exampleInputPassword1">Password</label>
+                                             <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                             </div>
+                                            
+                                             <button type="submit" class="btn btn-primary">Login</button>
+                                         </form>
+                                     </div>
+                                    <div role="tabpanel" class="tab-pane" id="tenant">
+                                        
+                                        <img src="/users//img/tenant1.jpeg" class="img-responsive img-circle login-img" alt="Image">
+                                        
+                                        <form action="/users/loginTenant" method="POST" enctype="application/x-www-form-urlencoded">
+                                            <div class="form-group">
+                                            <label for="exampleInputEmail1">Username</label>
+                                            <input type="email" name="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                            </div>
+                                            <div class="form-group">
+                                            <label for="exampleInputPassword1">Password</label>
+                                            <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                            </div>
+                                           
+                                            <button type="submit" class="btn btn-success">Login</button>
+                                        </form>
+                                     </div>
+                                </div>
+                            </div>
+                         </div>
+                   </div>
+                   
+                   
+                   
+               </div>
+           </div>
+           
+       </div>
+       
+
+        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <!-- Bootstrap JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </body>
+</html>
