@@ -31,6 +31,16 @@ router.post('/searchproperty', async function(req, res, next) {
   
 });
 
+router.post('/showDetailsPropertyFeedback', async function(req, res, next) {
+  await dbCon.connectDB();
+  const feedbac=await database.feedbac.find({propertyID:req.body.propertyID}).sort({_id: -1}).limit(20);
+    
+  await dbCon.closeDB();
+  res.send({feedbac:feedbac})
+  
+  
+});
+
 router.post('/searchtenant', async function(req, res, next) {
   var postCode=req.body.tenantPostCode.replace(/\s/g, '').toUpperCase();
   await dbCon.connectDB();

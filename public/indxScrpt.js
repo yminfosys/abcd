@@ -42,10 +42,11 @@ $.post('/searchproperty',{propertytype:propertytype,postCode:postCode,landlordNa
         <p>Address : '+val.doorNo+', '+val.address+' ,<br>Post Code: '+val.postCode+'</p>\
     </li>\
     <li class="list-group-item list-group-item-success" >\
-      <span class="badge"></span>\
-      Proprty rating * * * \
+      <span <button onclick="showDetailsPropertyFeedback(' + val.propertyID + ')" class="badge">Feedback Details</span>\
+      Proprty rating '+val.rating.toFixed(0)+' <i  class="fa fa-star" aria-hidden="true"></i> \
   </li>\
   </ul>\
+  <div id="feedbackDetails"></div>\
 </div>\
 </div>');
             
@@ -68,6 +69,20 @@ function closeSearch(){
     $("#Search").css({"display":"none"})
     $("#owl-slider").css({"display":"block"})
     $("#contain").css({"display":"block"})
+}
+
+
+function showDetailsPropertyFeedback(propertyID){
+  $.post('/showDetailsPropertyFeedback',{propertyID:propertyID}, async function(data){
+   
+        data.feedbac.forEach(val => {
+        $("#feedbackDetails").append('<li class="list-group-item"><h4>'+val.ratingname+':</h4> '+val.rating+' <i class="fa fa-star" aria-hidden="true"></i>\
+        <br>Msg: '+val.detailsrating+' </li>')
+        });
+      
+
+  })
+
 }
 
 
@@ -98,7 +113,7 @@ $.post('/searchtenant',{tenanttytype:tenanttytype,tenantPostCode:tenantPostCode,
     </li>\
     <li class="list-group-item list-group-item-success" >\
       <span class="badge"></span>\
-      Tenant rating * * * \
+      Tenant rating '+val.rating+' <i  class="fa fa-star" aria-hidden="true"></i>\
   </li>\
   </ul>\
 </div>\

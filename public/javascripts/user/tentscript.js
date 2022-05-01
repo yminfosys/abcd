@@ -138,9 +138,10 @@ $( document ).ready(function() {
       }
     }
     
-    // for (let i = 0; i <= 3; i++) {
-    //     $("#propertyStar"+i+"").addClass("yellow");
-    //   }
+    var rating=$("#selectrdRating").val();
+    for (let i = 0; i <= 3; i++) {
+        $("#propertyStar"+i+"").addClass("yellow");
+      }
 })
 
 
