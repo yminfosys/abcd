@@ -92,6 +92,17 @@ const propertyrequestSchema = new mongoose.Schema({
 var propertyrequestmodul = mongoose.model('requestproperty', propertyrequestSchema);
 
 
+const exiestingpropertyrequestSchema = new mongoose.Schema({ 
+    propertyID:Number,
+    tenantID:Number,
+    addressproof:String,
+    status:String,
+    date: { type: Date, default: Date.now }
+});
+
+var exiestingpropertyrequestmodul = mongoose.model('exiestingrequestproperty', exiestingpropertyrequestSchema);
+
+
 const feedbacSchema = new mongoose.Schema({ 
     ratingby:String,
     ratingname:String,
@@ -139,6 +150,7 @@ module.exports={
     counter:countermodul,
     property:propertymodul,
     propertyrequest:propertyrequestmodul,
+    exiestingpropertyrequest:exiestingpropertyrequestmodul,
     feedbac:feedbacmodul,
     lease:leasemodul
 }

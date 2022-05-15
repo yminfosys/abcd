@@ -55,7 +55,8 @@ var cpUpload = upload.fields([
   { name: 'file2', maxCount: 1 },
   { name: 'file3', maxCount: 1 },
   { name: 'file4', maxCount: 1 },
-  { name: 'file5', maxCount: 1 }
+  { name: 'file5', maxCount: 1 },
+  { name: 'file6', maxCount: 1 }
 ])
 
 
@@ -437,6 +438,29 @@ router.post('/addNewPropertyByLandlord',cpUpload, async function(req, res, next)
   })
 
 });
+
+
+
+router.post('/verifyyourselveRequest',cpUpload, async function(req, res, next) {
+  if (req.files.file6) {
+    impAdsProof = req.files.file6[0].transforms[0].location;
+    
+     await dbCon.connectDB();
+    const exiestpropReq= await database.exiestingpropertyrequest({
+      propertyID:req.body.propertyID,
+      tenantID:req.cookies.tenantID,
+      addressproof:impAdsProof,
+      status:"New",
+    });
+
+    console.log(impAdsProof)
+    await exiestpropReq.save();
+     await dbCon.closeDB();
+    res.redirect('/users/tenant')
+  }else{
+    res.send("Select an Image for Address proof and try again")
+  }
+})
 
 
 

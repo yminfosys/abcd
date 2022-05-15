@@ -9,14 +9,17 @@ var dotenv=require('dotenv').config();
 
 
 
+
 router.get('/', async function(req, res, next) {
     await dbCon.connectDB();
     const property=await database.propertyrequest.find({status:"New"});
 
     const tenant=await database.tenant.find({status:"New"});
+
+    const existproperty=await database.exiestingpropertyrequest.find({status:"New"});
     await dbCon.closeDB();
 
-    res.render('admin/myadmin',{property:property,tenant:tenant});
+    res.render('admin/myadmin',{property:property,tenant:tenant,existproperty:existproperty});
 })
 
 
@@ -112,6 +115,53 @@ router.post('/verifyProperty', async function(req, res, next) {
 })
 
 
+
+
+router.post('/ViewPropertyVeryfy', async function(req, res, next) {
+  await dbCon.connectDB();
+  const property=await database.property.findOne({propertyID:req.body.propertyID});
+
+  res.json(property);
+
+  await dbCon.closeDB();
+})
+
+
+router.post('/verifyExistingProperty', async function(req, res, next) {
+  await dbCon.connectDB();
+
+  const prop=await database.property.findOne({propertyID:req.body.propertyID});
+  const tenant=await database.tenant.findOne({tenantID:req.cookies.tenantID});
+  const islease=await database.lease.findOne({postCode:prop.postCode,doorNo:prop.doorNo,tenantID:tenant.tenantID});
+
+  const updateExistingrequest=await database.exiestingpropertyrequest.findOneAndUpdate({propertyID:req.body.propertyID,tenantID:req.cookies.tenantID},{$set:{status:"Verified"}});
+  
+  
+
+    if(!islease){
+      const lease= await  database.lease({
+        tenantID:tenant.tenantID,
+        tenantName:tenant.name,
+        landlordID:prop.landlordID,
+        landlordName:prop.landlordName,
+        propertyID:prop.propertyID,
+        status:"Active",
+        name:prop.name,
+        type:prop.type,
+        postCode:prop.postCode.replace(/\s/g, '').toUpperCase(),
+        doorNo:prop.doorNo,
+        address:prop.address,
+        country:prop.country,
+        imgMain:prop.imgMain,
+        impOp1:prop.impOp1,
+        impOp2:prop.impOp2,
+        impOp3:prop.impOp3,
+      });
+      await lease.save();
+    }
+    await dbCon.closeDB();
+  res.json(updateExistingrequest);
+})
 
 
 

@@ -10,6 +10,7 @@ function closeaddproperty(){
     $("#addProp").css({"display":"none"})
     $("#searchProp").css({"display":"block"}) 
     $("#box2").css({"display":"block"}) 
+    $("#veryfiyourself").css({"display":"none"})
 }
 
 function searchProperty(){
@@ -53,12 +54,34 @@ function chengeImg(url){
 
 function addpropertylease(propertyID){
     //alert(propertyID)
-    $.post('/users/addpropertyTolease',{propertyID:propertyID},function(data){
-        if(data){
-            window.location.href='/users/login'
-        }
-    })
+    // $.post('/users/addpropertyTolease',{propertyID:propertyID},function(data){
+    //     if(data){
+    //         window.location.href='/users/login'
+    //     }
+    // })
+    $("#veryfiyourself").css({"display":"block"});
+    $("#veryfiyourself").html(' <div class="panel-heading">\
+    <h3 class="panel-title">Verify Your Self</h3>\
+  </div>\
+  <div class="panel-body">\
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">\
+      <div class="thumbnail">\
+        <img id="imgadsprf" src="/images/home.png"  alt="Image">\
+        <div class="caption" style="text-align: center;">\
+          <form action="/users/verifyyourselveRequest" method="POST" enctype="multipart/form-data"  role="form">\
+              <input type="file"  accept="image/*" capture="camera" name="file6" id="file6"  onchange="loadFileAds(event)" style="display: none; width: 100%;">\
+              <label class="btn btn-default" for="file6" style="cursor: pointer;">Property Address Proof <i class="fa fa-camera" aria-hidden="true"></i></label>\
+              <p>Ex: Bank Statement, Gas Electric bill, Phone bill, Rent agreement, Rent Slip Etc</p>\
+                <input type="hidden" name="propertyID" value="'+propertyID+'">\
+              <button   type="submit" class="btn btn-success">Submit</button>\
+        </form>\
+        </div>\
+      </div>\
+    </div>\
+  </div>')
 }
+
+
 
 
 

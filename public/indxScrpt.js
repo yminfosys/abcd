@@ -79,11 +79,10 @@ function showDetailsPropertyFeedback(propertyID){
         $("#feedbackDetails").append('<li class="list-group-item"><h4>'+val.ratingname+':</h4> '+val.rating+' <i class="fa fa-star" aria-hidden="true"></i>\
         <br>Msg: '+val.detailsrating+' </li>')
         });
-      
-
   })
 
 }
+
 
 
 function tenantSearch(){
